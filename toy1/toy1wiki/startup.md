@@ -46,3 +46,11 @@ ERROR: modpost: "kallsyms_lookup_name" [/home/link/Desktop/toy1/ko.ko] undefined
 为避免上述问题，上述方法最好在较低版本内核使用（5.7.0以下），如果使用较为新的内核，可以参考这里的issue：
 
 https://github.com/xcellerator/linux_kernel_hacking/issues/3
+
+本人摆烂切换了内核版本为5.4.0.81，特此告知。
+
+具体切换方法参考这两个博客：
+
+https://zhuanlan.zhihu.com/p/413655133
+
+https://www.freesion.com/article/3763402812/
