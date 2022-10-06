@@ -8,7 +8,7 @@ Thanks for uploading, I give my 'like'.
 ## Description:
 this rootkit can hack the syscall, and have some abilities to hide information.
 
-## Baiscs:
+## Basics:
 Linux environment is needed. WSL might got some path fault(but I still can't figure it out).
 
 ## Others:

@@ -1,4 +1,4 @@
-obj-m := main.o
+obj-m := ko.o
 cc = gcc -Wall
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
