@@ -13,7 +13,7 @@ unsigned long * __sys_call_table = NULL;
 static int __init mode_init(void) {
     printk(KERN_INFO "rootkit:init\n");
 
-    __sys_call_table = (unsinged long *) kallsyms_lookup_name("sys_call_table");
+    __sys_call_table = (unsigned long *) kallsyms_lookup_name("sys_call_table");
     return 0;
 }
 
