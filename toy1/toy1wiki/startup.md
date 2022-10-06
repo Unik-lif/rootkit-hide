@@ -19,8 +19,8 @@ static void __exit mode_exit(void) {
     printk(KERN_INFO "rootkit:exit\n");
 }
 
-module_init(mod_init);
-module_exit(mod_exit);
+module_init(mode_init);
+module_exit(mode_exit);
 ```
 
 对应的makefile文件已经在文件中给出。由于涉及到系统路径，这里推荐在Ubuntu环境下使用，不推荐WSL。
@@ -39,6 +39,10 @@ these are more relative to the kernel. In kernel source code we have seen that t
 通过上面的查阅可以找到系统调用和内核调用函数表的基础地址。
 
 ### 注意事项
-一些其他：建议在内核版本较为老旧的linux中进行实验，经过本人的实测，该方案仅适用于5.7.0以下的版本，如果使用较为新的内核，可以参考这里的issue：
+一些其他：建议在内核版本较为老旧的linux中进行实验，在较新版本中，进行make时会看到以下现象：
+```
+ERROR: modpost: "kallsyms_lookup_name" [/home/link/Desktop/toy1/ko.ko] undefined!
+```
+为避免上述问题，上述方法最好在较低版本内核使用（5.7.0以下），如果使用较为新的内核，可以参考这里的issue：
 
 https://github.com/xcellerator/linux_kernel_hacking/issues/3
