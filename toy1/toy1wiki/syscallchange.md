@@ -171,6 +171,6 @@ static asmlinkage long hack_kill(pid_t pid, int sig) {
 #endif
 ```
 ## 其他思路：
-py昨晚和我说了他的思路，他觉得'insmod rmmod'这样有点dinner，因此他打算能够在启动的时候修改进程文件的ELF，以此腾出空间注入自定义恶意代码。他自信能够做出来，不过咱还是做一些翻车的准备为妙。
+py昨晚和我说了他的思路，他觉得'insmod rmmod'这样有点dinner，因此他打算能够在启动的时候修改进程文件的ELF，以此腾出空间注入自定义恶意代码。
 
 rootkit的hook思路介绍完毕，大家可以利用toy1在适当的环境下玩耍了。我要开始看第二个toy了。
