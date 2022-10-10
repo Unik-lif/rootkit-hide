@@ -33,3 +33,11 @@ Eidos(3364902617) 2022/10/9 17:42:42
 
 https://arttnba3.cn/2021/07/07/CODE-0X01-ROOTKIT/#0x00-%E6%A6%82%E8%BF%B0
 
+文件隐藏：process：task_struct-->file_struct-->fdtable
+遍历一下fdtable里头内容，fd s.
+
+
+fopen()
+fclose()
+FILE *fp = fopen("filepath.txt", "r+");
+file descriptor: 文件描述符
