@@ -1,1 +1,0 @@
-cmd_/home/link/Desktop/libre/fake/fake/fake.ko := ld -r -m elf_x86_64  -z max-page-size=0x200000  --build-id  -T ./scripts/module-common.lds -o /home/link/Desktop/libre/fake/fake/fake.ko /home/link/Desktop/libre/fake/fake/fake.o /home/link/Desktop/libre/fake/fake/fake.mod.o;  true

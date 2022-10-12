@@ -174,6 +174,10 @@ notifier_call_chain(&nh->head, val, v, nr_to_call, nr_calls); // 参数v即为mo
 
 ret = nb->notifier_call(nb, val, v); // 参数v即为mod存储的位置
 ```
+再看看fake.c中的关键函数行：
+```C
+int my_notifier_call(struct notifier_block *nb, unsigned long action, void *data);
+```
 所以呢，当我们自己定义了一个notifier_call函数并插装到自己写的模块之中，不出意外notifier_call_chain会把包含新模块装载的信息以参数v来传递，这就是我们的void * data部分。
 
 总而言之，当我们的fake模块装载完后，再装一个test模块，其信息会以info的形式传递，并生成module信息，这个module信息将会在notifier_call链中传递，直到notifier_call函数使用了这个信息。
