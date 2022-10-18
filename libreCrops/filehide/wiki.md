@@ -145,3 +145,4 @@ static inline bool dir_emit(struct dir_context *ctx, const char *name, int namel
 
 https://stackoverflow.com/questions/49128739/how-to-access-the-proc-file-systems-iiterate-function-pointer
 
+之后，简单替换其功能即可完成文件隐藏的工作。而进程隐藏的原理与之一模一样，因此便可结题于此。
