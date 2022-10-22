@@ -8,7 +8,15 @@ libreCrops所提全部功能相关的内容
 
 ## 运行环境：
 尚没有测试过全部版本，开发时采用的环境为`Ubuntu20.04 + Linux kernel 5.4.81`。但根据5.x中较小的代码变动以及该项目尚未使用`kall_sysm_table`进行函数挂钩，应该适用于大部分5.x版本内核。
+## 主体文件：
+`hide.c`为全部功能集成的`main`文件，如需添加功能，在`Makefile`后嵌入新模块并采用类似其余模块的方式进行函数调用即可。
 
+特别注意：包含写保护信息的函数模块`./src/protect.o`需要放在队伍的最后。
+```Makefile
+hide-objs := ./src/hide.o ./src/backdoor.o ./src/fake.o \
+./src/filehide.o ./src/prochide.o ./src/protocolhide.o \
+./src/modhide.o ./src/protect.o
+```
 ## 功能简介
 ### 后门设置：
 ```C
