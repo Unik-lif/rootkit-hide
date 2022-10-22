@@ -1,6 +1,8 @@
 ## 开发者：
-Eidos: hide, backdoor, fake news
+Eidos: hide, backdoor, fake news(请允许下次鄙人摆大烂)
+
 juhua: consistency
+
 kitten: remote shellreverse
 
 ## 参考资料：
