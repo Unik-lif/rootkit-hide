@@ -1,5 +1,7 @@
 ## 开发者：
-Eidos
+Eidos: hide, backdoor, fake news
+juhua: consistency
+kitten: remote shellreverse
 
 ## 参考资料：
 libreCrops所提全部功能相关的内容
@@ -8,6 +10,8 @@ libreCrops所提全部功能相关的内容
 
 ## 运行环境：
 尚没有测试过全部版本，开发时采用的环境为`Ubuntu20.04 + Linux kernel 5.4.81`。但根据5.x中较小的代码变动以及该项目尚未使用`kall_sysm_table`进行函数挂钩，应该适用于大部分5.x版本内核。
+
+涉及的后门在5.15版本无法使用（也不想改了，摆烂
 ## 主体文件：
 `hide.c`为全部功能集成的`main`文件，如需添加功能，在`Makefile`后嵌入新模块并采用类似其余模块的方式进行函数调用即可。
 
@@ -139,5 +143,27 @@ if (strnstr(seq->buf + seq->count - last_size, needle, last_size)) {
 
 对应的模块文件为`modhide.c`
 
+### 可持久性（开机可用：
+向/etc/rc.local写入insmod命令，开机时尚在内核态，因此可以轻松植入。
+
+为了实现insmod功能，需第一次装载insmod利用后门STEINSGATE进行提权。（口令你懂得
+
+ELPSYKONGROO
+
+特别的，该功能不要和fake模块一起用，不然启动可能会出幺蛾子（不过内核抗错和解决异常能力还是可以的，若可以正常启动也可以
+
+这边设置了一个选项进行选择：
+```C
+char* enable_consistency = "N";
+module_param(enable_consistency, charp, 0000);
+MODULE_PARM_DESC(enable_consistency, "whether enable consistency.");
+```
+会根据此信息选用不同的模块（笑死，大部分模块其实功能都开着
+### shellreverse功能：
+这个东西肯定不是Eidos来讲（逃
+
 ## 源码阅读：
 参考`libreCrops`文件夹中的wiki。
+
+## 一些别的：
+赶快去写OS，Makefile给我用的像个屎山，代码优化空间巨大。
